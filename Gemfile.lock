@@ -1,0 +1,29 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    artii (2.1.2)
+    colorize (0.8.1)
+    dotenv (2.8.1)
+    rake (13.0.6)
+    rexml (3.2.5)
+    rubyzip (2.3.2)
+    selenium-webdriver (4.9.1)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
+    thor (1.2.2)
+    websocket (1.2.9)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  artii (~> 2.1)
+  colorize (~> 0.8.1)
+  dotenv (~> 2.8)
+  rake (~> 13.0)
+  selenium-webdriver (~> 4.9)
+  thor (~> 1.2)
+
+BUNDLED WITH
+   2.3.26
