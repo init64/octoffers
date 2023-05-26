@@ -8,13 +8,13 @@ class OctOffers < Thor
     true
   end
 
-  desc "start PLATFORM", "Start automated job on the platform"
-  def start(platform)
+  desc "fetch PLATFORM ROLE", "fetch all available jobs on the platform"
+  def fetch(platform, role="DevOps")
     case platform
     when "djinni"
       if ENV["DJINNI_SESSIONID"] 
         DjinniDriver.session_authorization
-        DjinniDriver.fetch_jobs
+        DjinniDriver.fetch_jobs(role)
       else
         puts "You didn't provide a COOKIE_SESSIONID into dotenv file"
       end
@@ -23,10 +23,22 @@ class OctOffers < Thor
     end
     # require_relative "platforms/#{platform}/#{script}.rb"
   end
-  
-  desc "auth PLATFORM TYPE ?USERNAME ?PASSWORD", "Login into platform"
-  def auth(platform, type = "oauth2", username = nil, password = nil)
-    puts("Feature isn't ready yet", platform, type, username, password)  
+
+  desc "clear", "Clear all fetched jobs"
+  def clear()
+    DjinniDriver.clear_jobs
+  end
+
+  desc "show CATEGORY|ALL", "Show all fetched jobs"
+  def show(category)
+    res = $db.execute(
+      category != "all" ? 
+        "SELECT role, link, category FROM jobs WHERE category = '#{category}'" 
+        : "SELECT * FROM jobs;" 
+    )
+    res.each do |dat|
+      puts "[ #{dat[0]} ]\n    |- #{dat[1]}\n    |- #{dat[2]}" 
+    end
   end
 end
 

@@ -1,3 +1,9 @@
+task default: :test
+
 task :test do
-  ruby "test/main.rb"
+  ruby "bin/main.rb fetch djinni"
+end
+
+task :db do
+  ruby "db/schema.rb"
 end

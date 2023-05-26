@@ -1,9 +1,10 @@
 require_relative "../../webdriver" 
+require_relative "../../../db/schema.rb"
 require "dotenv/load"
 
 module DjinniDriver 
   DOMAIN = "djinni.co"
-  JOB_FILTER = "?all-keywords=&any-of-keywords=&exclude-keywords=&primary_keyword=DevOps"
+  JOB_FILTER = "?all-keywords=&any-of-keywords=&exclude-keywords="
   SESSION_COOKIE =  {
     name: "sessionid",
     value: ENV["DJINNI_SESSIONID"],
@@ -27,16 +28,23 @@ module DjinniDriver
     $wait.until { $driver.current_url == DOMAIN } 
   end
 
-  def self.fetch_jobs()
+  def self.fetch_jobs(role)
     10.times do |idx|
-      $driver.navigate.to("https://#{DOMAIN}/jobs/#{JOB_FILTER}&page=#{idx}")
+      $driver.navigate.to("https://#{DOMAIN}/jobs/#{JOB_FILTER}&primary_keyword=#{role}&page=#{idx}")
       opportunity_elements = $wait.until {
         $driver.find_elements(css: '.profile')
       } 
       opportunity_elements.each do |element|
-        puts "#{element.text}"
+        puts "#{element.text}\n   |- #{element.attribute("href")}"
+        $db.execute(
+          "INSERT INTO jobs(role, link, category) VALUES(?, ?, ?)",
+          [element.text, element.attribute("href"), role]
+        )
       end
     end
   end
-end
 
+  def self.clear_jobs()
+    $db.execute("DELETE FROM jobs;")
+  end
+end
