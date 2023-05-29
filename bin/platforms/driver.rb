@@ -15,4 +15,10 @@ class Driver
     $driver.manage.add_cookie(@session_cookie)
   end
 
+  # I'm use "self" only for now, in near future I'll use different
+  # for many platforms
+  def self.clear()
+    $db.execute("DELETE FROM jobs;") 
+  end
+
 end
