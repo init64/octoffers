@@ -1,7 +1,7 @@
 # webgtx @ 2023 
 
 require "thor"
-require_relative "platforms/djinni/main"
+require_relative "platforms/djinni"
 
 class OctOffers < Thor
   def self.exit_on_faliure

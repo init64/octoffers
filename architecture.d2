@@ -1,0 +1,24 @@
+Octoffers: {
+
+  interfaces: Application Interfaces { 
+    cli: Command Line
+    rest: Rest API 
+  }
+
+  drivers: Platform Drivers {
+    djinni: { style.fill: "green" }
+    indeed: { style.fill: "blue" }
+    linkedin: { style.fill: "brown" }
+  }  
+  
+  database: Sqlite3 Database { shape: cylinder }
+  webdriver: Chrome-based Web Driver { shape: hexagon }
+
+  interfaces.cli <-> drivers.djinni  
+  interfaces.cli <-> drivers.indeed 
+  interfaces.cli <-> drivers.linkedin  
+  database -> interfaces.cli: Showing available Jobs from the database
+  drivers.djinni -> database: Storing Jobs results data from the driver
+  drivers.djinni -> webdriver: Executing selenium scripts
+  webdriver -> drivers.djinni: Fetching accessible jobs opportunities 
+}
