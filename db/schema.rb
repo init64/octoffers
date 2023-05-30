@@ -6,6 +6,7 @@ $db.execute(<<-SQL)
     id INTEGER PRIMARY KEY,
     role TXT,
     link TXT,
-    category TXT
+    category TXT,
+    checked BOOL
   );
 SQL
