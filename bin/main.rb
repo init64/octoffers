@@ -13,7 +13,12 @@ class OctOffers < Thor
     case platform
     when "djinni"
       if ENV["DJINNI_SESSIONID"] 
-        djinni_driver = Djinni.new(ENV["DJINNI_SESSIONID"])
+        djinni_driver = Djinni.new({
+          name: "sessionid",
+          value: ENV["DJINNI_SESSIONID"],
+          path: "/",
+          expires: (Time.now + 3600).to_i
+        }, "djinni.co")
         djinni_driver.session_authorization
         djinni_driver.fetch_jobs(role)
       else
