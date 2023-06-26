@@ -9,11 +9,13 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sqlite3 (1.6.3-x64-mingw32)
     sqlite3 (1.6.3-x86_64-linux)
     thor (1.2.2)
     websocket (1.2.9)
 
 PLATFORMS
+  x64-mingw32
   x86_64-linux
 
 DEPENDENCIES

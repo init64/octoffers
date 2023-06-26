@@ -5,6 +5,9 @@ class Djinni < Driver
 
   def fetch_jobs(role="devops")
     10.times do |idx|
+      if idx == 0
+        next
+      end
       $driver.navigate.to("https://#{@domain}/jobs/#{JOB_FILTER}&primary_keyword=#{role}&page=#{idx}")
       opportunity_elements = $wait.until {
         $driver.find_elements(css: '.profile')

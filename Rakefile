@@ -32,9 +32,12 @@ task :apply do
   
   djinni_driver.session_authorization
   djinni_driver.apply_jobs("devops", "perfectone")
-  
+end
+
+task :wb do
+  require_relative "bin/webdriver"
 end
 
 task :db do
-  ruby "db/schema.rb"
+  ruby "db/schema"
 end

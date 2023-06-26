@@ -5,9 +5,14 @@ Automatic offers from any career website
 - **Djinni**
 - **Indeed**
 
+### Requirements
+- **ruby** ~> 3.0 
+- **chrome webdriver**
+
 ### DotENV sample
 ```env
 DJINNI_SESSIONID="sessionid_cookie:2193dhsa9h419d1"
+HEADLESS=1
 ```
 
 ### Usage 
