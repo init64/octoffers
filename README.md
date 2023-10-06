@@ -22,7 +22,7 @@ HEADLESS=1
 `echo "SECRET='data'" > .env`
 3) **Use OctOffers**
 ```bash
-ruby bin/main.rb start djinni
+ruby bin/main.rb fetch djinni devops
 ruby bin/main.rb help
 ```
 
