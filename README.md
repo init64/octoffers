@@ -1,30 +1,23 @@
 # 🐙💼 OctOffers
-Automatic offers from any career website
+Search for job interviews automatically
 
 ### Supported Platforms
 - **Djinni**
-- **Indeed**
 
 ### Requirements
-- **ruby** ~> 3.0 
+- **python 3.9+**
 - **chrome webdriver**
 
 ### DotENV sample
 ```env
-DJINNI_SESSIONID="sessionid_cookie:2193dhsa9h419d1"
+DJINNI_TOKEN="sessionid_cookie:2193dhsa9h419d1"
 HEADLESS=1
 ```
 
 ### Usage 
 1) **Install required dependency**
-`bundle install`
-2) **Provide credentials**
-`echo "SECRET='data'" > .env`
-3) **Use OctOffers**
+`pip install -r requirements.txt`
+2) **Use OctOffers**
 ```bash
-ruby bin/main.rb fetch djinni devops
-ruby bin/main.rb help
+python octoffers djinni --apply
 ```
-
-### How to run tests 
-`rake test`
