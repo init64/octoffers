@@ -1,6 +1,9 @@
 # 🐙💼 OctOffers
 Search for job interviews automatically
 
+### Architecture overview
+![architecture](architecture.svg)
+
 ### Supported Platforms
 - **Djinni**
 
