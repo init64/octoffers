@@ -10,14 +10,10 @@ load_dotenv()
 
 # Getting cookie values
 session_id = os.getenv("DJINNI_SESSION_ID")
-hj_session_user = os.getenv("DJINNI_HJ_SESSION_USER")
-csrf_token = os.getenv("DJINNI_CSRF_TOKEN")
 
 # Generating a list of cookies
 session_cookies = [
-    {'name': 'sessionid', 'value': session_id, 'domain': '.djinni.co'},
-    {'name': '_hjSessionUser_3704742', 'value': hj_session_user, 'domain': '.djinni.co'},
-    {'name': 'csrftoken', 'value': csrf_token, 'domain': '.djinni.co'}
+    {"name": "sessionid", "value": session_id, "domain": ".djinni.co"}
 ]
 
 
