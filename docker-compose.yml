@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  app:
-    build: .
-    environment:
-      - DJINNI_TOKEN=${DJINNI_TOKEN}
-    volumes:
-      - .:/app

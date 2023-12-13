@@ -16,17 +16,18 @@ from intergrations.chat_gpt import get_cover_letter_from_openai
 load_dotenv()
 
 
-class Djinni:
+class Djinni(Driver):
     JOB_FILTER = "?all-keywords=&any-of-keywords=&exclude-keywords="
 
     def __init__(self, domain="djinni.co"):
-        self.driver_instance = Driver(domain)
-        self.wait = WebDriverWait(self.driver_instance.driver, 20)
+        super().__init__(domain)
+        self.wait = WebDriverWait(self.driver, 20)
+        # self.driver_instance = Driver(domain)
         # db = DatabaseManager(db_path)
 
     def _get_job_list(self, url):
-        self.driver_instance.driver.get(url)
-        self.driver_instance.driver.save_screenshot(
+        self.driver.get(url)
+        self.driver.save_screenshot(
             "screenshots/screenshot_vacancies.png"
         )
         return self.wait.until(
@@ -121,7 +122,7 @@ class Djinni:
                     except sqlite3.Error as e:
                         print(f"Data insertion error: {e}")
 
-    def apply_jobs(self):
+    def apply_jobs(self, cover_letter: str, ai_generated_letter: bool):
         # Retrieving all matching records from a database
         job_entries = db.execute(
             "SELECT job_id, role, link, category, source, description FROM jobs WHERE matches = 1 AND cv_sent = 0"
@@ -131,7 +132,7 @@ class Djinni:
             job_id, role, job_link, category, source, job_description = job_entry
             print(f"{job_link:<80} Checking...")
 
-            self.driver_instance.driver.get(job_link)
+            self.driver.get(job_link)
 
             # Search for the “Apply for a vacancy” button and click on it
             try:
@@ -142,19 +143,25 @@ class Djinni:
                     )
                 )
                 # Take and save a screenshot
-                self.driver_instance.driver.save_screenshot(
+                self.driver.save_screenshot(
                     "screenshots/screenshot_send_cv.png"
                 )
                 apply_button.click()
             except TimeoutException:
                 print("Button not found or already applied")
-                self.driver_instance.driver.save_screenshot(
+                self.driver.save_screenshot(
                     "screenshots/screenshot_send_cv.png"
                 )
                 continue
 
-            # Generating a cover letter
-            cover_letter = get_cover_letter_from_openai(job_description)
+            if ai_generated_letter:
+                # Generating a cover letter
+                cover_letter = get_cover_letter_from_openai(job_description)
+            elif cover_letter:
+                print(cover_letter)
+
+            exit()
+
 
             # Inserting a Cover Letter and Submitting an Application
             try:
