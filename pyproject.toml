@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "octoffers"
+version = "0.1.0"
+description = ""
+authors = ["Viktor Andriichuk <v.andriichuk@gmail.com>"]
+license = "n"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+fire = "0.5.0"
+selenium = "4.15.2"
+python-dotenv = "^1.0.0"
+beautifulsoup4 = "^4.12.2"
+lxml = "^4.9.3"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
