@@ -13,8 +13,7 @@ Search for job interviews automatically
 
 ### DotENV sample
 ```env
-DJINNI_TOKEN="sessionid_cookie:2193dhsa9h419d1"
-HEADLESS=1
+DJINNI_SESSION_ID="sessionid_cookie:2193dhsa9h419d1"
 ```
 
 ### Usage 
@@ -22,5 +21,5 @@ HEADLESS=1
 `pip install -r requirements.txt`
 2) **Use OctOffers**
 ```bash
-python octoffers djinni --apply
+python octoffers --help
 ```
