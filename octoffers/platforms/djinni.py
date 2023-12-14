@@ -22,6 +22,7 @@ class Djinni(Driver):
     def __init__(self, domain="djinni.co"):
         super().__init__(domain)
         self.wait = WebDriverWait(self.driver, 20)
+        self.origin = "https://djinni.co/jobs/"
         # self.driver_instance = Driver(domain)
         # db = DatabaseManager(db_path)
 
@@ -42,14 +43,14 @@ class Djinni(Driver):
         numbers = [int(s) for s in re.findall(r"\b\d+\b", salary_text)]
         return min(numbers) if numbers else 0
 
-    def fetch_jobs(
-        self, url, role=None, tools=None, min_salary=None, exclusion_words=None
+    def fetch(
+        self, role=None, tools=None, min_salary=None, keywords: tuple = None, exclusion_words: tuple = None, pages: int = 3
     ):
-        for idx in range(1, 2):
+        for idx in range(pages):
             full_url = (
-                f"{url}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
+                f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
                 if role
-                else f"{url}&page={idx}"
+                else f"{self.origin}&page={idx}"
             )
             print(full_url)
 
@@ -98,6 +99,11 @@ class Djinni(Driver):
                 ):
                     matches = False  # If exception words are found
                     print("Condition triggered exclusion_words")
+                if keywords and any(
+                    word.lower() in job_title.lower() for word in keywords
+                ):
+                    matches = True  # If exception words are found
+                    print("Condition triggered keywords")
 
                 job_exists = db.execute(
                     "SELECT 1 FROM jobs WHERE job_id = ?", (job_id,)
@@ -122,13 +128,13 @@ class Djinni(Driver):
                     except sqlite3.Error as e:
                         print(f"Data insertion error: {e}")
 
-    def apply_jobs(self, cover_letter: str, ai_generated_letter: bool):
+    def apply(self, msg: str, ai_generated_letter: bool = False):
         # Retrieving all matching records from a database
         job_entries = db.execute(
             "SELECT job_id, role, link, category, source, description FROM jobs WHERE matches = 1 AND cv_sent = 0"
         ).fetchall()
 
-        for job_entry in job_entries[:1]:
+        for job_entry in job_entries:#[:1]:
             job_id, role, job_link, category, source, job_description = job_entry
             print(f"{job_link:<80} Checking...")
 
@@ -157,10 +163,8 @@ class Djinni(Driver):
             if ai_generated_letter:
                 # Generating a cover letter
                 cover_letter = get_cover_letter_from_openai(job_description)
-            elif cover_letter:
-                print(cover_letter)
-
-            exit()
+            elif msg:
+                cover_letter = msg
 
 
             # Inserting a Cover Letter and Submitting an Application
