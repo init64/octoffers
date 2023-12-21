@@ -22,12 +22,15 @@ class Driver:
         self.domain = domain
         self.session_cookies = session_cookies
 
+    def _initiate_driver(self):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         self.driver = webdriver.Chrome(options=chrome_options)
+        self.wait = WebDriverWait(self.driver, 20)
         self.session_authorization()
+
 
     def session_authorization(self):
         self.driver.get(f"https://{self.domain}")

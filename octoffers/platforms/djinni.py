@@ -21,10 +21,7 @@ class Djinni(Driver):
 
     def __init__(self, domain="djinni.co"):
         super().__init__(domain)
-        self.wait = WebDriverWait(self.driver, 20)
         self.origin = "https://djinni.co/jobs/"
-        # self.driver_instance = Driver(domain)
-        # db = DatabaseManager(db_path)
 
     def _get_job_list(self, url):
         self.driver.get(url)
@@ -44,9 +41,11 @@ class Djinni(Driver):
         return min(numbers) if numbers else 0
 
     def fetch(
-        self, role=None, tools=None, min_salary=None, keywords: tuple = None, exclusion_words: tuple = None, pages: int = 3
+        self, role=None, tools=None, min_salary=None, exclusion_words: tuple = None, pages: int = 3
     ):
+        self._initiate_driver()
         for idx in range(pages):
+            idx += 1
             full_url = (
                 f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
                 if role
@@ -99,11 +98,12 @@ class Djinni(Driver):
                 ):
                     matches = False  # If exception words are found
                     print("Condition triggered exclusion_words")
-                if keywords and any(
-                    word.lower() in job_title.lower() for word in keywords
-                ):
-                    matches = True  # If exception words are found
-                    print("Condition triggered keywords")
+                # !IMPLEMENT THIS LATER!
+                # if keywords and any(
+                #     not word.lower() in job_title.lower() for word in keywords
+                # ):
+                #     matches = False  # If exception words are found
+                #     print("Condition triggered keywords")
 
                 job_exists = db.execute(
                     "SELECT 1 FROM jobs WHERE job_id = ?", (job_id,)
@@ -129,6 +129,7 @@ class Djinni(Driver):
                         print(f"Data insertion error: {e}")
 
     def apply(self, msg: str, ai_generated_letter: bool = False):
+        self._initiate_driver()
         # Retrieving all matching records from a database
         job_entries = db.execute(
             "SELECT job_id, role, link, category, source, description FROM jobs WHERE matches = 1 AND cv_sent = 0"
