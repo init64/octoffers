@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-# import sqlite3
 
 from platforms.driver import Driver
 from db.schemes.djinni import db
@@ -21,7 +20,7 @@ class Djinni(Driver):
 
     def __init__(self, domain="djinni.co"):
         super().__init__(domain)
-        self.origin = "https://djinni.co/jobs/"
+        self.origin = f"https://{domain}/jobs/"
 
     def _get_job_list(self, url):
         self.driver.get(url)
@@ -49,7 +48,7 @@ class Djinni(Driver):
             full_url = (
                 f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
                 if role
-                else f"{self.origin}&page={idx}"
+                else f"{self.origin}?page={idx}"
             )
             print(full_url)
 
