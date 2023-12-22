@@ -21,6 +21,7 @@ class Djinni(Driver):
     def __init__(self, domain="djinni.co"):
         super().__init__(domain)
         self.origin = f"https://{domain}/jobs/"
+        self.chrome_args = ("--headless", "--no-sandbox", "--disable-dev-shm-usage")
 
     def _get_job_list(self, url):
         self.driver.get(url)
@@ -42,7 +43,8 @@ class Djinni(Driver):
     def fetch(
         self, role=None, tools=None, min_salary=None, exclusion_words: tuple = None, pages: int = 3
     ):
-        self._initiate_driver()
+        self._initiate_driver(*self.chrome_args)
+        self.session_authorization()
         for idx in range(pages):
             idx += 1
             full_url = (
@@ -99,8 +101,7 @@ class Djinni(Driver):
                     print("Condition triggered exclusion_words")
                 # !IMPLEMENT THIS LATER!
                 # if keywords and any(
-                #     not word.lower() in job_title.lower() for word in keywords
-                # ):
+                #     not word.lower() in job_title.lower() for word in keywords # ):
                 #     matches = False  # If exception words are found
                 #     print("Condition triggered keywords")
 
@@ -128,7 +129,8 @@ class Djinni(Driver):
                         print(f"Data insertion error: {e}")
 
     def apply(self, msg: str, ai_generated_letter: bool = False):
-        self._initiate_driver()
+        self._initiate_driver(*self.chrome_args)
+        self.session_authorization()
         # Retrieving all matching records from a database
         job_entries = db.execute(
             "SELECT job_id, role, link, category, source, description FROM jobs WHERE matches = 1 AND cv_sent = 0"
