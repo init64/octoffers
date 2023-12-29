@@ -25,9 +25,7 @@ class Djinni(Driver):
 
     def _get_job_list(self, url):
         self.driver.get(url)
-        self.driver.save_screenshot(
-            "screenshots/screenshot_vacancies.png"
-        )
+        self.driver.save_screenshot("screenshots/screenshot_vacancies.png")
         return self.wait.until(
             lambda driver: driver.find_elements(
                 By.CSS_SELECTOR,
@@ -41,7 +39,12 @@ class Djinni(Driver):
         return min(numbers) if numbers else 0
 
     def fetch(
-        self, role=None, tools=None, min_salary=None, exclusion_words: tuple = None, pages: int = 3
+        self,
+        role=None,
+        tools=None,
+        min_salary=None,
+        exclusion_words: tuple = None,
+        pages: int = 3,
     ):
         self._initiate_driver(*self.chrome_args)
         self.session_authorization()
@@ -136,7 +139,7 @@ class Djinni(Driver):
             "SELECT job_id, role, link, category, source, description FROM jobs WHERE matches = 1 AND cv_sent = 0"
         ).fetchall()
 
-        for job_entry in job_entries:#[:1]:
+        for job_entry in job_entries:  # [:1]:
             job_id, role, job_link, category, source, job_description = job_entry
             print(f"{job_link:<80} Checking...")
 
@@ -151,15 +154,11 @@ class Djinni(Driver):
                     )
                 )
                 # Take and save a screenshot
-                self.driver.save_screenshot(
-                    "screenshots/screenshot_send_cv.png"
-                )
+                self.driver.save_screenshot("screenshots/screenshot_send_cv.png")
                 apply_button.click()
             except TimeoutException:
                 print("Button not found or already applied")
-                self.driver.save_screenshot(
-                    "screenshots/screenshot_send_cv.png"
-                )
+                self.driver.save_screenshot("screenshots/screenshot_send_cv.png")
                 continue
 
             if ai_generated_letter:
@@ -167,7 +166,6 @@ class Djinni(Driver):
                 cover_letter = get_cover_letter_from_openai(job_description)
             elif msg:
                 cover_letter = msg
-
 
             # Inserting a Cover Letter and Submitting an Application
             try:
@@ -184,9 +182,7 @@ class Djinni(Driver):
                 continue
 
             # Updating the submission status in the database
-            db.execute(
-                "UPDATE jobs SET cv_sent = 1 WHERE job_id = ?", (job_id,)
-            )
+            db.execute("UPDATE jobs SET cv_sent = 1 WHERE job_id = ?", (job_id,))
             db.commit()
 
             print(f"Application sent for {job_link}")

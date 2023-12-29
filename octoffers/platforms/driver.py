@@ -12,9 +12,7 @@ load_dotenv()
 session_id = os.getenv("DJINNI_SESSION_ID")
 
 # Generating a list of cookies
-session_cookies = [
-    {"name": "sessionid", "value": session_id, "domain": ".djinni.co"}
-]
+session_cookies = [{"name": "sessionid", "value": session_id, "domain": ".djinni.co"}]
 
 
 class Driver:
@@ -27,8 +25,8 @@ class Driver:
         for arg in argv:
             chrome_options.add_argument(str(arg))
         self.driver = webdriver.Chrome(options=chrome_options)
+        # self.driver.implicitly_wait(5)
         self.wait = WebDriverWait(self.driver, 20)
-
 
     def session_authorization(self):
         self.driver.get(f"https://{self.domain}")
