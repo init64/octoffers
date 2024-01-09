@@ -26,7 +26,7 @@ class Driver:
             chrome_options.add_argument(str(arg))
         self.driver = webdriver.Chrome(options=chrome_options)
         # self.driver.implicitly_wait(5)
-        self.wait = WebDriverWait(self.driver, 20)
+        self.wait = WebDriverWait(self.driver, 5)
 
     def session_authorization(self):
         self.driver.get(f"https://{self.domain}")

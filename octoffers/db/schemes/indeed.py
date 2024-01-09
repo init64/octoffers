@@ -12,8 +12,8 @@ with db:
             link TEXT,
             description TEXT,
             easy_apply BOOLEAN DEFAULT FALSE,
-            matches BOOLEAN DEFAULT FALSE,
-            cv_sent BOOLEAN DEFAULT FALSE
+            cv_sent BOOLEAN DEFAULT FALSE,
+            applicable BOOLEAN DEFAULT TRUE
         )
     """
     )
