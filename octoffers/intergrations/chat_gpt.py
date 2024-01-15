@@ -26,7 +26,6 @@ def get_cover_letter_from_openai(vacancy_description=None):
             "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
         )
 
-        # Обработка ответа
         if response.status_code != 200:
             print("Ошибка API:", response.status_code)
             print("Содержимое ответа:", response.text)
