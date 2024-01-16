@@ -1,11 +1,16 @@
-# 🐙💼 OctOffers
+# OctOffers
 Octoffers is a tool that automatically hunts down suitable jobs and applies for you on major job boards.
 
-![resultsfromindeed](./assets/indeed_result.png)
+<img src="./assets/octoffers_mascot.png" align="right" width="50%">
+
 
 ### Supported Platforms
-- **Djinni**
-- **Indeed** (Private)
+| Platform | Type    | Status            |
+|----------|---------|-------------------|
+| Djinni   | Public  | Complete          |
+| Indeed   | Private | Beta              |
+| WorkBC   | Public  | Under Development |
+| Monster  | Public  | Under Development |
 
 ### Requirements
 - **python 3.9+**
@@ -39,6 +44,3 @@ DJINNI_SESSION_ID="sessionid_cookie:2193dhsa9h419d1"
     - **A:** Customization depends on the driver, if specific career platform is hard to automate, most likely that `apply()` submission method will be more basic.
 - **Q:** What is the success rate of Octoffers applications compared to manual ones?
     - **A:** It depends on the role that you're applying for,
-
-### Software architecture
-![architecture](./assets/architecture.svg)
