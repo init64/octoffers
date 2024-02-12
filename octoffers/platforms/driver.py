@@ -29,7 +29,6 @@ class Driver:
         # self.driver.implicitly_wait(5)
         self.wait = WebDriverWait(self.driver, 5)
 
-
     def session_authorization(self):
         self.driver.get(f"https://{self.domain}")
 
