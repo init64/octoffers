@@ -1,0 +1,15 @@
+services:
+  octoffers:
+    #image: octoffers
+    build:
+      context: .
+      dockerfile: octoffers.Containerfile
+      tags: ["octoffers:latest"]
+
+#   chrome-webdriver:
+#     image: docker.io/selenium/standalone-chrome
+#     ports:
+#       - "4444:4444"
+#       - "7900:7900"
+#     shm_size: "2gb"
+# 
