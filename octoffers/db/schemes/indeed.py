@@ -1,7 +1,10 @@
+import os
 import sqlite3
-from os import environ
 
-db = sqlite3.connect(f"{environ['HOME']}/.config/octoffers/indeed.db")
+if os.name == "nt":
+    db = sqlite3.connect("./indeed.db")
+else:
+    db = sqlite3.connect(f"{os.environ['HOME']}/.config/octoffers/indeed.db")
 with db:
     db.execute(
         """
