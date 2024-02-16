@@ -1,7 +1,11 @@
+import os
 import sqlite3
-from os import environ
+from pathlib import Path
 
-db = sqlite3.connect(f"{environ['HOME']}/.config/octoffers/djinni.db")
+if os.name == "nt":
+    db = sqlite3.connect(f"{Path.home()}/Octoffers/djinni.db")
+else:
+    db = sqlite3.connect(f"{os.environ['HOME']}/.config/octoffers/djinni.db")
 with db:
     db.execute(
         """
