@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,7 +22,7 @@ class Driver:
     def __init__(self, domain):
         self.domain = domain
         self.session_cookies = session_cookies
-        self.octoffers_path = "./" if os.name == "nt" else f"{environ['HOME']}/.config/octoffers"
+        self.octoffers_path = f"{Path.home()}/Octoffers" if os.name == "nt" else f"{environ['HOME']}/.config/octoffers"
 
     def _initiate_driver(self, *argv):
         chrome_options = Options()

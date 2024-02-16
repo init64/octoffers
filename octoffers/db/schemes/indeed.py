@@ -1,8 +1,9 @@
 import os
 import sqlite3
+from pathlib import Path
 
 if os.name == "nt":
-    db = sqlite3.connect("./indeed.db")
+    db = sqlite3.connect(f"{Path.home()}/Octoffers/indeed.db")
 else:
     db = sqlite3.connect(f"{os.environ['HOME']}/.config/octoffers/indeed.db")
 with db:
