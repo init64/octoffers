@@ -1,9 +1,11 @@
-name: Djinni test
+name: Set up environment for Octoffers
 
-on: workflow_call
+on: 
+  branch: ["cicd-playground"] # workflow_call
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: docker-compose -f "compose.yml" up -d
