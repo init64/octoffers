@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: podman-compose -f "compose.yml" up -d
+      # - run: podman-compose -f "compose.yml" up -d
+      - run: podman build . -t octoffers -f octoffers.Containerfile
