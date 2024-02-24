@@ -1,7 +1,8 @@
 name: Set up environment for Octoffers
 
 on: 
-  branch: ["cicd-playground"] # workflow_call
+  push:
+    branches: ["cicd-playground"] # workflow_call
 
 jobs:
   setup:
