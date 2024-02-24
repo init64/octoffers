@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: webgtx/setup-podman-compose@v0.1
+      - uses: webgtx/setup-podman-compose@0.1
       # - run: podman-compose -f "compose.yml" up -d
       # - run: podman build . -t octoffers -f octoffers.Containerfile
