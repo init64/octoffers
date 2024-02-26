@@ -19,9 +19,10 @@ on:
   #       default: 'python'
 
 jobs:
-  octoffers-setup:
-    uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
+  checkout:
     runs-on: ubnutu-latest
     steps:
       - uses: actions/checkout@v3
+  setup-octoffers:
+    uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
 
