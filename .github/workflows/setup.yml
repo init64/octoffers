@@ -1,0 +1,11 @@
+name: Set up environment for Octoffers
+
+on: workflow_call
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: webgtx/setup-podman-compose@v1
+      - run: podman-compose -f "compose.yml" up -d
