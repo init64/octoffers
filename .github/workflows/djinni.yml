@@ -9,7 +9,7 @@ on:
         description: "Select job type"
         required: true
         type: choice
-        options: 
+        options:
           - "fetch"
           - "apply"
       role:
@@ -22,3 +22,6 @@ jobs:
   setup-octoffers:
     uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
 
+  testjob:
+    steps:
+      - run: echo "${{ inputs.jobtype }} | ${{ inputs.role }}"
