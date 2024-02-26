@@ -1,14 +1,11 @@
 name: Set up environment for Octoffers
 
-on: 
-  push:
-    branches: ["cicd-playground"] # workflow_call
+on: workflow_call
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: webgtx/setup-podman-compose@v0.5
+      - uses: webgtx/setup-podman-compose@v1
       - run: podman-compose -f "compose.yml" up -d
-      # - run: podman build . -t octoffers -f octoffers.Containerfile

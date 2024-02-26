@@ -1,20 +1,22 @@
 name: Djinni test workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      jobtype:
-        description: "Select job type"
-        required: true
-        type: choice
-        options: 
-          - "fetch"
-          - "apply"
-      role:
-        description: "Specify role"
-        type: string
-        required: true
-        default: 'python'
+  push:
+    branches: ["cicd-playground"]
+  # workflow_dispatch:
+  #   inputs:
+  #     jobtype:
+  #       description: "Select job type"
+  #       required: true
+  #       type: choice
+  #       options: 
+  #         - "fetch"
+  #         - "apply"
+  #     role:
+  #       description: "Specify role"
+  #       type: string
+  #       required: true
+  #       default: 'python'
 
 jobs:
   octoffers-setup:

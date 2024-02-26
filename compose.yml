@@ -1,6 +1,5 @@
 services:
   octoffers:
-    #image: octoffers
     build:
       context: .
       dockerfile: octoffers.Containerfile
