@@ -1,8 +1,8 @@
 name: Djinni test workflow
 
 on:
-  #push:
-  #  branches: ["cicd-playground"]
+  push:
+    branches: ["cicd-playground"]
   workflow_dispatch:
     inputs:
       jobtype:
