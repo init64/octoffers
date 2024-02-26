@@ -23,5 +23,6 @@ jobs:
     uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
 
   testjob:
+    runs-on: ubuntu-latest
     steps:
       - run: echo "${{ inputs.jobtype }} | ${{ inputs.role }}"
