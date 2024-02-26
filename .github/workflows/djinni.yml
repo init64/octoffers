@@ -1,28 +1,24 @@
 name: Djinni test workflow
 
 on:
-  push:
-    branches: ["cicd-playground"]
-  # workflow_dispatch:
-  #   inputs:
-  #     jobtype:
-  #       description: "Select job type"
-  #       required: true
-  #       type: choice
-  #       options: 
-  #         - "fetch"
-  #         - "apply"
-  #     role:
-  #       description: "Specify role"
-  #       type: string
-  #       required: true
-  #       default: 'python'
+  #push:
+  #  branches: ["cicd-playground"]
+  workflow_dispatch:
+    inputs:
+      jobtype:
+        description: "Select job type"
+        required: true
+        type: choice
+        options: 
+          - "fetch"
+          - "apply"
+      role:
+        description: "Specify role"
+        type: string
+        required: true
+        default: 'python'
 
 jobs:
-  checkout:
-    runs-on: ubnutu-latest
-    steps:
-      - uses: actions/checkout@v3
   setup-octoffers:
     uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
 
