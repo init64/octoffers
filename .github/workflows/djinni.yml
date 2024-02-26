@@ -23,5 +23,5 @@ jobs:
     runs-on: ubnutu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./setup.yml
+      - uses: octoffers/.github/workflows/setup.yml
 
