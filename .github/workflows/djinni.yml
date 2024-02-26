@@ -20,8 +20,8 @@ on:
 
 jobs:
   octoffers-setup:
+    uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
     runs-on: ubnutu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
 
