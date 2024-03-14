@@ -51,7 +51,8 @@ class Djinni(Driver):
         for idx in range(pages):
             idx += 1
             full_url = (
-                f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
+                #f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
+                f"{self.origin}?all-keywords={role}&keywords={role}"
                 if role
                 else f"{self.origin}?page={idx}"
             )
