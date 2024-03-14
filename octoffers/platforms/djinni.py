@@ -44,21 +44,24 @@ class Djinni(Driver):
         tools=None,
         min_salary=None,
         exclusion_words: tuple = None,
-        pages: int = 3,
+        pages: int = 1,
     ):
         self._initiate_driver(*self.chrome_args)
         self.session_authorization()
-        for idx in range(pages):
-            idx += 1
+        for idx in range(1, pages + 1):
             full_url = (
                 #f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
-                f"{self.origin}?all-keywords={role}&keywords={role}"
+                f"{self.origin}?all-keywords={role}&keywords={role}&page={idx}"
                 if role
                 else f"{self.origin}?page={idx}"
             )
+            job_list = self._get_job_list(full_url)
+
             print(full_url)
 
-            job_list = self._get_job_list(full_url)
+            if self.driver.current_url == self.origin:
+                print("Redirected to the main page")
+                break
 
             for job_item in job_list:
                 title_element = job_item.find_element(
