@@ -47,7 +47,7 @@ python octoffers djinni apply "Hello, I'm looking for job" # <-- This argument s
 
 ### `.env` sample
 ```env
-DJINNI_SESSION_ID="sessionid_cookie:2193dhsa9h419d1"
+DJINNI_SESSION_ID=".2193dhsa9h419d1"
 ```
 
 ### Questions & Anwsers
