@@ -6,7 +6,6 @@ class Octoffers:
         self.djinni = Djinni()
         try:
             from platforms.private.indeed import Indeed
-
             self.indeed = Indeed()
         except ModuleNotFoundError:
             print("Private drivers weren't found")

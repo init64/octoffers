@@ -48,6 +48,8 @@ python octoffers djinni apply "Hello, I'm looking for job" # <-- This argument s
 ### `.env` sample
 ```env
 DJINNI_SESSION_ID=".2193dhsa9h419d1"
+MOCK_EMAILADDR="jhondoe@gmail.com"
+INDEED_REGION="ca"
 ```
 
 ### Questions & Anwsers
