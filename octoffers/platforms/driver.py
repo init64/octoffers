@@ -1,13 +1,10 @@
-import os
-from pathlib import Path
-
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from os import getenv, environ
+from os import getenv, environ, name as osname
 
 load_dotenv()
 
@@ -19,10 +16,10 @@ session_cookies = [{"name": "sessionid", "value": session_id, "domain": ".djinni
 
 
 class Driver:
-    def __init__(self, domain):
+    def __init__(self, domain: str = None):
         self.domain = domain
         self.session_cookies = session_cookies
-        self.octoffers_path = f"{Path.home()}/Octoffers" if os.name == "nt" else f"{environ['HOME']}/.config/octoffers"
+        self.octoffers_path = f"{Path.home()}/Octoffers" if osname == "nt" else f"{environ['HOME']}/.config/octoffers"
 
     def _initiate_driver(self, *argv):
         chrome_options = Options()
