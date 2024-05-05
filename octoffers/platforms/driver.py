@@ -4,7 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from os import getenv, environ, name as osname
+from os import getenv, name as osname
+from pathlib import Path
 
 load_dotenv()
 
@@ -19,7 +20,9 @@ class Driver:
     def __init__(self, domain: str = None):
         self.domain = domain
         self.session_cookies = session_cookies
-        self.octoffers_path = f"{Path.home()}/Octoffers" if osname == "nt" else f"{environ['HOME']}/.config/octoffers"
+        self.octoffers_path = Path.home() / "Octoffers" if osname == "nt" else Path.home() / ".config/octoffers"
+        self.profile_name = "default"
+        self.profile_path = self.octoffers_path / "profiles" / self.profile_name
 
     def _initiate_driver(self, *argv):
         chrome_options = Options()
