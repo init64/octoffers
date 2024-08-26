@@ -25,11 +25,10 @@ class Djinni(Driver):
 
     def _get_job_list(self, url):
         self.driver.get(url)
-        self.driver.save_screenshot("screenshots/screenshot_vacancies.png")
+        self.driver.find_elements()
         return self.wait.until(
             lambda driver: driver.find_elements(
-                By.CSS_SELECTOR,
-                "ul.list-unstyled.list-jobs.mb-4 li.list-jobs__item.job-list__item",
+                By.XPATH, "//li[starts-with(@id, 'job-item-')]" 
             )
         )
 
@@ -49,6 +48,7 @@ class Djinni(Driver):
         self._initiate_driver(*self.chrome_args)
         self.session_authorization()
         for idx in range(1, pages + 1):
+            breakpoint()
             full_url = (
                 #f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
                 f"{self.origin}?all-keywords={role}&keywords={role}&page={idx}"
@@ -57,27 +57,22 @@ class Djinni(Driver):
             )
             job_list = self._get_job_list(full_url)
 
-            print(full_url)
+            print(full_url)  
 
             if self.driver.current_url == self.origin:
                 print("Redirected to the main page")
                 break
 
             for job_item in job_list:
-                title_element = job_item.find_element(
-                    By.CSS_SELECTOR,
-                    "div.job-list-item__title.mb-1 a.job-list-item__link",
-                )
+                title_element = job_item.find_element(By.CSS_SELECTOR, "h3 > a")
                 job_title = title_element.text
                 job_link = title_element.get_attribute("href")
                 job_id = job_link.split("/jobs/")[1].split("-")[0]
 
                 description_element_id = "job-description-" + job_id
-                description_html = job_item.find_element(
+                job_description = job_item.find_element(
                     By.ID, description_element_id
-                ).get_attribute("data-original-text")
-                soup = BeautifulSoup(description_html, "lxml")
-                job_description = soup.get_text(separator=" ", strip=True)
+                ).text
 
                 # Retrieving salary information
                 salary_element = job_item.find_elements(
