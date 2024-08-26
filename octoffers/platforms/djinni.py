@@ -48,7 +48,6 @@ class Djinni(Driver):
         self._initiate_driver(*self.chrome_args)
         self.session_authorization()
         for idx in range(1, pages + 1):
-            breakpoint()
             full_url = (
                 #f"{self.origin}{self.JOB_FILTER}&primary_keyword={role}&page={idx}"
                 f"{self.origin}?all-keywords={role}&keywords={role}&page={idx}"
