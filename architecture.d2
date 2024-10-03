@@ -1,24 +1,41 @@
 Octoffers: {
 
-  interfaces: Application Interfaces { 
-    cli: Command Line
-    rest: Rest API 
+  interfaces: Application Interfaces {
+    cli: Command Line {
+      Apply: {style.fill: "purple"}
+      Fetch: {style.fill: "purple"}
+      Export
+    }
+    rest: Rest API
   }
 
   drivers: Platform Drivers {
-    djinni: { style.fill: "green" }
+    djinni: { 
+      style.fill: "green"
+        selenium: {
+          auth: Auth Script
+          apply: Apply Script
+        }
+    }
     indeed: { style.fill: "blue" }
     linkedin: { style.fill: "brown" }
   }  
-  
-  database: Sqlite3 Database { shape: cylinder }
+
+  database: Sqlite3 Database {
+    shape: cylinder 
+    linkedin
+    djinni
+    indeed
+  }
   webdriver: Chrome-based Web Driver { shape: hexagon }
 
-  interfaces.cli <-> drivers.djinni  
-  interfaces.cli <-> drivers.indeed 
-  interfaces.cli <-> drivers.linkedin  
-  database -> interfaces.cli: Showing available Jobs from the database
-  drivers.djinni -> database: Storing Jobs results data from the driver
-  drivers.djinni -> webdriver: Executing selenium scripts
-  webdriver -> drivers.djinni: Fetching accessible jobs opportunities 
+  interfaces.cli.apply <-> drivers.djinni
+  interfaces.cli.apply <-> drivers.indeed
+  interfaces.cli.fetch <-> drivers.linkedin
+  database.linkedin <-> interfaces.cli.fetch: Write & Display data
+  database.linkedin -> interfaces.cli.export: Showing available Jobs from the database
+  drivers.djinni.selenium.auth -> drivers.djinni.selenium.apply
+  drivers.djinni <- database.djinni: Accessing available jobs for apply
+  drivers.djinni -> webdriver: Executing selenium apply scripts
+  drivers.linkedin <-> webdriver: Executing selenium fetch scripts
 }

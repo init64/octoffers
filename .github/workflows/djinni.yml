@@ -1,0 +1,28 @@
+name: Djinni test workflow
+
+on:
+  push:
+    branches: ["cicd-playground"]
+  workflow_dispatch:
+    inputs:
+      jobtype:
+        description: "Select job type"
+        required: true
+        type: choice
+        options:
+          - "fetch"
+          - "apply"
+      role:
+        description: "Specify role"
+        type: string
+        required: true
+        default: 'python'
+
+jobs:
+  setup-octoffers:
+    uses: init64/octoffers/.github/workflows/setup.yml@cicd-playground
+
+  testjob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ inputs.jobtype }} | ${{ inputs.role }}"
