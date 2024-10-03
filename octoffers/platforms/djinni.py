@@ -2,7 +2,6 @@ import os
 import sys
 from dotenv import load_dotenv
 import re
-from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By

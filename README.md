@@ -2,7 +2,7 @@
 Octoffers is a tool that automatically hunts down suitable jobs and applies for you on major job boards.
 
 
-<img src="./assets/octoffers_mascot.png" align="right" width="50%">
+<img src="./.assets/octoffers_mascot.png" align="right" width="50%">
 
 ### Supported Platforms
 | Platform | Type    | Status            |
