@@ -1,6 +1,9 @@
 from fire import Fire
 from octoffers.platforms.djinni import Djinni
 from octoffers.platforms.profile import Profile
+from sys import path
+from pathlib import Path
+from os import environ
 
 class Octoffers:
     def __init__(self, profile: str = None):
@@ -10,8 +13,10 @@ class Octoffers:
             from octoffers.platforms.private import Indeed
             self.indeed = Indeed(profile=profile)
 
+        except ImportError:
+            pass
         except ModuleNotFoundError:
-            print("Private drivers weren't found")
+            pass
 
     def manual_authorization(self):
         self.djinni.manual_authorization()
