@@ -7,8 +7,8 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-from platforms.driver import Driver
-from db.schemes.djinni import db
+from octoffers.platforms.driver import Driver
+from octoffers.db.schemes.djinni import db
 from intergrations.chat_gpt import get_cover_letter_from_openai
 
 load_dotenv()
