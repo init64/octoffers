@@ -1,7 +1,7 @@
 from pathlib import Path
 from shutil import rmtree
 from os import mkdir
-from platforms.driver import Driver
+from octoffers.platforms.driver import Driver
 
 class Profile:
     def __init__(self, name: str = "default"):

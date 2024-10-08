@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from octoffers.platforms.driver import Driver
 from octoffers.db.schemes.djinni import db
-from intergrations.chat_gpt import get_cover_letter_from_openai
+from octoffers.intergrations.chat_gpt import get_cover_letter_from_openai
 
 load_dotenv()
 
