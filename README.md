@@ -57,3 +57,15 @@ INDEED_REGION="ca"
     - **A:** Customization depends on the driver, if specific career platform is hard to automate, most likely that `apply()` submission method will be more basic.
 - **Q:** What is the success rate of Octoffers applications compared to manual ones?
     - **A:** It depends on the role that you're applying for,
+
+### Data Visualization
+
+#### Star History
+
+<a href="https://star-history.com/#init64/octoffers&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=init64/octoffers&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=init64/octoffers&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=init64/octoffers&type=Date" />
+ </picture>
+</a>
