@@ -1,18 +1,21 @@
-[tool.poetry]
+[project]
 name = "octoffers"
 version = "0.1.0"
 description = ""
-authors = ["init64.org"]
-license = "BSD 3-Clause License"
+authors = [{ name = "init64.org" }]
+license = { text = "BSD 3-Clause License" }
 readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fire==0.5.0",
+    "selenium==4.15.2",
+    "python-dotenv==1.0.0",
+    "requests==2.31.0",
+    "pytest==8.1.1"
+]
 
-[tool.poetry.dependencies]
-python = ">=3.9"
-fire = "0.5.0"
-selenium = "4.15.2"
-python-dotenv = "^1.0.0"
-requests = "^2.31.0"
-pytest = "8.1.1"
+[project.scripts]
+octoffers = "octoffers:main"
 
 [build-system]
 requires = ["setuptools >= 61.0"]

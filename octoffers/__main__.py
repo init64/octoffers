@@ -16,4 +16,8 @@ class Octoffers:
     def manual_authorization(self):
         self.djinni.manual_authorization()
 
-Fire(Octoffers)
+def main():
+    Fire(Octoffers)
+
+if __name__ == "__main__":
+    main()
